@@ -11,6 +11,10 @@ $ErrorActionPreference = 'Stop'
 # Ensure we're at repo root
 Set-Location -LiteralPath $PSScriptRoot
 
+# Upstream and fork (PRs go from fork branch -> upstream master)
+$Upstream = 'MicrosoftLearning/SC-300-Identity-and-Access-Administrator'
+$ForkOwner = 'v-absamim'
+
 # Lab definitions: number (zero-padded), title, modified files, deleted files
 $labs = @(
     @{ N='00'; Title='Lab Environment Setup';
@@ -150,14 +154,15 @@ foreach ($lab in $labs) {
     }
     Invoke-Git commit -m $msg
 
-    # Push
-    Invoke-Git push -u origin $branch --force-with-lease
+    # Push (force, since re-runs may recreate the local branch)
+    Invoke-Git push -u origin $branch --force
 
-    # Create PR (skip if one already exists for this branch)
-    $existingPr = gh pr list --head $branch --state open --json number --jq '.[0].number' 2>$null
+    # Create PR against upstream (skip if one already exists for this fork branch)
+    $headRef = "${ForkOwner}:${branch}"
+    $existingPr = gh pr list --repo $Upstream --head $headRef --state open --json number --jq '.[0].number' 2>$null
     if ([string]::IsNullOrWhiteSpace($existingPr)) {
-        $body = "Per-lab fix split out from `lab1-fixes`.`n`nScope: Lab $n - $title."
-        gh pr create --base master --head $branch --title $msg --body $body
+        $body = "Per-lab fix split out from ``lab1-fixes``.`n`nScope: Lab $n - $title."
+        gh pr create --repo $Upstream --base master --head $headRef --title $msg --body $body
         if ($LASTEXITCODE -ne 0) { throw "gh pr create failed for $branch" }
     } else {
         Write-Host "PR #$existingPr already open for $branch; skipping create." -ForegroundColor Yellow
