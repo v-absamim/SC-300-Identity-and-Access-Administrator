@@ -1,0 +1,97 @@
+name: Feedback Report
+description: File a feedback report
+title: "M00-LAB00: QUICK_DESCRIPTION"
+labels: ["feedback"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # Thanks for taking the time to fill out this feedback report!
+
+        **Replace feedback name "M00-LAB00: QUICK_DESCRIPTION" with the correct lab and short description**  
+        Example: **M04-LAB13: Improve Conditional Access explanation**
+
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info 😉?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What should we change?
+      description: Provide your suggested improvement
+      placeholder: Describe your proposal clearly
+      value: |
+        Exercise: 00
+        Task: 00
+        Step: 00
+
+        Proposal:
+
+        Suggested improvement:
+    validations:
+      required: true
+
+  - type: dropdown
+    id: lab
+    attributes:
+      label: Lab
+      description: Select the SC-300 lab
+      options:
+        - Other
+        - Lab 00 SetUpLabResources
+        - Lab 01 ManageUserRoles
+        - Lab 02 WorkingWithTenantProperties
+        - Lab 03 AssignLicensesToUsersByGroupMembershipAAD
+        - Lab 04 ConfigureExternalCollaborationSettings
+        - Lab 05 AddGuestUsersToTheDirectory
+        - Lab 06 AddFederatedIdentityProvider
+        - Lab 07 AddHybridIdentityWithAzureADConnect
+        - Lab 08 EnableAzureADMultifactorAuthentication
+        - Lab 09 ConfigureAndDeploySelfServicePasswordReset
+        - Lab 10 AzureADAuthenticationForWindowsAndLinuxVM
+        - Lab 11 AssignAzureResourcesRolesInPrivilegedIdentityManagement
+        - Lab 12 ManageAzureADSmartLockoutValues
+        - Lab 13 ImplementAndTestAConditionalAccessPolicy
+        - Lab 14 EnableSignInRiskPolicy
+        - Lab 15 ConfigureAAD_MultiFactorAuthRegPolicy
+        - Lab 16 UsingAzureKeyVaultForManagedIdentities
+        - Lab 17 DefenderForCloudAppsDiscoveryAndRestrictions
+        - Lab 18 DefenderForCloudAppsAccessPolicies
+        - Lab 19 RegisterAnApplication
+        - Lab 20 ImplementAccessManagementForApps
+        - Lab 21 GrantTenantWideAdminConsentToAnApplication
+        - Lab 22 CreateAndManageACatalogOfResourcesInAADEntitlementManagement
+        - Lab 23 AddTermsOfUseAcceptanceReporting
+        - Lab 24 ManageTheLifecycleOfExternalUsersInAADIdentityGovernanceSettings
+        - Lab 25 CreatingAccessReviewsForUsers
+        - Lab 26 ConfigurePrivilegedIdentityManagementForAADRoles
+        - Lab 27 MicrosoftSentinelKustoQueries
+        - Lab 28 MonitorIdentitySecureScore
+    validations:
+      required: true
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact
+      options:
+        - Low
+        - Medium
+        - High
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Relevant screenshots
+      description: Please copy and paste any relevant screenshots 📸
+      value: paste here 😉
+``
